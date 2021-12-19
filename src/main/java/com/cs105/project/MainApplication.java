@@ -14,7 +14,7 @@ public class MainApplication extends Application {
             new FXMLLoader(MainApplication.class.getResource("project-view.fxml"));
         VBox box = fxmlLoader.load();
         Scene scene = new Scene(box, 240, 420);
-        stage.setTitle("Project of CUI");
+        stage.setTitle("Cui Inc. Lab 552B");
         stage.setScene(scene);
         stage.setOnCloseRequest(event -> {
             Logger.flush();

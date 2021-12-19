@@ -23,6 +23,7 @@ public class MainController {
     private Button start;
 
     private boolean mutualGaze = false;
+    private long startTime = 0;
     public int userScore = 0;
     public int robotScore = 0;
 
@@ -37,6 +38,8 @@ public class MainController {
         }
         robot.setImage(new Image(Objects.requireNonNull(
                 MainApplication.class.getResourceAsStream(imageName))));
+
+        startTime = System.currentTimeMillis();
 
         start.setDisable(true);
         escape.setDisable(false);
@@ -55,21 +58,35 @@ public class MainController {
 
     @FXML
     private void onEscapeButtonClick() {
+        long endTime = System.currentTimeMillis();
         boolean robotChoice = robotChoice();
 
         String imageName = null;
         if (robotChoice) { // robot go, user avoid
             robotScore = 3;
             userScore = 0;
+            if (mutualGaze) {
+                Rand.range = 1 - (1 - Rand.range) * (1 - 0.06);
+            } else {
+                Rand.range *= (1 - 0.06);
+            }
             imageName = "safe.gif";
         } else { // robot avoid, user avoid
             robotScore = 1;
             userScore = 1;
+            if (mutualGaze) {
+                Rand.range *= (1 - 0.02);
+            } else {
+                Rand.range = 1 - (1 - Rand.range) * (1 - 0.02);
+            }
             imageName = "road.jpeg";
         }
         welcomeText.setText(String.format("Your score: %d\t Robot's score: %d", userScore, robotScore));
         robot.setImage(new Image(Objects.requireNonNull(
                 MainApplication.class.getResourceAsStream(imageName))));
+
+        Logger.log(System.currentTimeMillis(), mutualGaze, robotChoice, false, endTime - startTime, robotScore,
+                userScore);
 
         start.setDisable(false);
         escape.setDisable(true);
@@ -78,11 +95,18 @@ public class MainController {
 
     @FXML
     private void onForwardButtonClick() {
+        long endTime = System.currentTimeMillis();
         boolean robotChoice = robotChoice();
+
         String imageName = null;
         if (robotChoice) { // robot go, user go
             robotScore = -4;
             userScore = -4;
+            if (mutualGaze) {
+                Rand.range *= (1 - 0.08);
+            } else {
+                Rand.range = 1 - (1 - Rand.range) * (1 - 0.08);
+            }
             imageName = "crash.gif";
         } else { // robot avoid, user go
             robotScore = 0;
@@ -92,6 +116,9 @@ public class MainController {
         welcomeText.setText(String.format("Your score: %d\t Robot's score: %d", userScore, robotScore));
         robot.setImage(new Image(Objects.requireNonNull(
                 MainApplication.class.getResourceAsStream(imageName))));
+
+        Logger.log(System.currentTimeMillis(), mutualGaze, robotChoice, true, endTime - startTime, robotScore,
+                userScore);
 
         start.setDisable(false);
         escape.setDisable(true);
