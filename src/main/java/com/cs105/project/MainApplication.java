@@ -13,10 +13,13 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader =
             new FXMLLoader(MainApplication.class.getResource("project-view.fxml"));
         VBox box = fxmlLoader.load();
-        Scene scene = new Scene(box, 240,420);
+        Scene scene = new Scene(box, 240, 420);
         stage.setTitle("Project of CUI");
         stage.setScene(scene);
-        stage.setOnCloseRequest(event -> System.exit(0));
+        stage.setOnCloseRequest(event -> {
+            Logger.flush();
+            System.exit(0);
+        });
         stage.show();
     }
 
