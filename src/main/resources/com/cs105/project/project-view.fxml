@@ -6,6 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox fx:id="mainPane" alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cs105.project.MainController">
     <padding>
@@ -15,8 +16,22 @@
 
     <Label fx:id="welcomeText" />
     <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
-        <Button fx:id="escape" mnemonicParsing="false" text="躲避" />
-        <Button fx:id="forward" mnemonicParsing="false" text="前进" />
+        <Button fx:id="escape" mnemonicParsing="false" prefHeight="41.0" prefWidth="61.0" text="躲避">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Label text="              ">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </Label>
+        <Button fx:id="forward" mnemonicParsing="false" prefHeight="41.0" prefWidth="61.0" text="前进">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
     </HBox>
-    <Button fx:id="start" onAction="#onHelloButtonClick" text="开始" />
+    <Button fx:id="start" onAction="#onHelloButtonClick" prefHeight="34.0" prefWidth="55.0" text="开始">
+      <font>
+         <Font size="15.0" />
+      </font></Button>
 </VBox>
