@@ -23,31 +23,8 @@ public class MainController {
     private Button start;
 
     private boolean mutualGaze = false;
-
-    // private Thread t;
-
-    // @SuppressWarnings("all")
-    // private Thread newThread() {
-    // return new Thread(() -> {
-    // while (true) {
-    // if (blank) {
-    // robot.setImage(
-    // new Image(Objects.requireNonNull(
-    // MainApplication.class.getResourceAsStream("safe.gif"))));
-    // } else {
-    // robot.setImage(
-    // new Image(Objects.requireNonNull(
-    // MainApplication.class.getResourceAsStream("crash.gif"))));
-    // }
-    // blank = !blank;
-    // try {
-    // Thread.sleep(2000);
-    // } catch (InterruptedException e) {
-    // e.printStackTrace();
-    // }
-    // }
-    // });
-    // }
+    public int userScore = 0;
+    public int robotScore = 0;
 
     @FXML
     private void onStartButtonClick() {
@@ -79,16 +56,18 @@ public class MainController {
     @FXML
     private void onEscapeButtonClick() {
         boolean robotChoice = robotChoice();
-        
+
         if (robotChoice) { // robot go, user avoid
-            // TODO score
+            robotScore = 3;
+            userScore = 0;
+        } else { // robot avoid, user avoid
+            robotScore = 1;
+            userScore = 1;
         }
-        else { // robot avoid, user avoid
-            
-        }
+        welcomeText.setText(String.format("Your score: %d\t Robot's score: %d", userScore, robotScore));
         robot.setImage(new Image(Objects.requireNonNull(
                 MainApplication.class.getResourceAsStream("safe.gif"))));
-        
+
         start.setDisable(false);
         escape.setDisable(true);
         forward.setDisable(true);
@@ -99,12 +78,15 @@ public class MainController {
         boolean robotChoice = robotChoice();
         String imageName = null;
         if (robotChoice) { // robot go, user go
-            // TODO score
+            robotScore = -4;
+            userScore = -4;
             imageName = "crash.gif";
-        }
-        else { // robot avoid, user go
+        } else { // robot avoid, user go
+            robotScore = 0;
+            userScore = 3;
             imageName = "safe.gif";
         }
+        welcomeText.setText(String.format("Your score: %d\t Robot's score: %d", userScore, robotScore));
         robot.setImage(new Image(Objects.requireNonNull(
                 MainApplication.class.getResourceAsStream(imageName))));
 
