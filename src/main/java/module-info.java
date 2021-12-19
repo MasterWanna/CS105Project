@@ -1,7 +1,7 @@
 module com.cs105.project {
     requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.graphics;
+    requires transitive javafx.graphics;
 
 
     opens com.cs105.project to javafx.fxml;
