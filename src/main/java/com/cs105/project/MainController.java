@@ -50,23 +50,26 @@ public class MainController {
      * @return true: go straight; false: avoid
      */
     private boolean robotChoice() {
-        return !(mutualGaze ^ Rand.isCui());
+        return mutualGaze == Rand.isCui();
     }
 
     @FXML
     private void onEscapeButtonClick() {
         boolean robotChoice = robotChoice();
 
+        String imageName = null;
         if (robotChoice) { // robot go, user avoid
             robotScore = 3;
             userScore = 0;
+            imageName = "safe.gif";
         } else { // robot avoid, user avoid
             robotScore = 1;
             userScore = 1;
+            imageName = "road.jpeg";
         }
         welcomeText.setText(String.format("Your score: %d\t Robot's score: %d", userScore, robotScore));
         robot.setImage(new Image(Objects.requireNonNull(
-                MainApplication.class.getResourceAsStream("safe.gif"))));
+                MainApplication.class.getResourceAsStream(imageName))));
 
         start.setDisable(false);
         escape.setDisable(true);
