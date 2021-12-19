@@ -22,39 +22,94 @@ public class MainController {
     @FXML
     private Button start;
 
-    private boolean blank = true;
+    private boolean mutualGaze = false;
 
-    private Thread t;
+    // private Thread t;
 
-    @SuppressWarnings("all")
-    private Thread newThread() {
-        return new Thread(() -> {
-            while (true) {
-                if (blank) {
-                    robot.setImage(
-                        new Image(Objects.requireNonNull(
-                            MainApplication.class.getResourceAsStream("Squirrel.jpeg"))));
-                } else {
-                    robot.setImage(
-                        new Image(Objects.requireNonNull(
-                            MainApplication.class.getResourceAsStream("aaa.png"))));
-                }
-                blank = !blank;
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+    // @SuppressWarnings("all")
+    // private Thread newThread() {
+    // return new Thread(() -> {
+    // while (true) {
+    // if (blank) {
+    // robot.setImage(
+    // new Image(Objects.requireNonNull(
+    // MainApplication.class.getResourceAsStream("safe.gif"))));
+    // } else {
+    // robot.setImage(
+    // new Image(Objects.requireNonNull(
+    // MainApplication.class.getResourceAsStream("crash.gif"))));
+    // }
+    // blank = !blank;
+    // try {
+    // Thread.sleep(2000);
+    // } catch (InterruptedException e) {
+    // e.printStackTrace();
+    // }
+    // }
+    // });
+    // }
+
+    @FXML
+    private void onStartButtonClick() {
+        welcomeText.setText("Welcome to Cui Inc. Lab!");
+        String imageName = null;
+        if (mutualGaze = Rand.isCui()) {
+            imageName = "robot_mutual.png";
+        } else {
+            imageName = "robot_avert.png";
+        }
+        robot.setImage(new Image(Objects.requireNonNull(
+                MainApplication.class.getResourceAsStream(imageName))));
+
+        start.setDisable(true);
+        escape.setDisable(false);
+        forward.setDisable(false);
+    }
+
+    /**
+     * look: 0.7 go straight, 0.3 avoid
+     * dont look: 0.7 avoid, 0.3 go straight
+     * 
+     * @return true: go straight; false: avoid
+     */
+    private boolean robotChoice() {
+        return !(mutualGaze ^ Rand.isCui());
     }
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-        if (t == null) {
-            t = newThread();
-            t.start();
+    private void onEscapeButtonClick() {
+        boolean robotChoice = robotChoice();
+        
+        if (robotChoice) { // robot go, user avoid
+            // TODO score
         }
+        else { // robot avoid, user avoid
+            
+        }
+        robot.setImage(new Image(Objects.requireNonNull(
+                MainApplication.class.getResourceAsStream("safe.gif"))));
+        
+        start.setDisable(false);
+        escape.setDisable(true);
+        forward.setDisable(true);
+    }
+
+    @FXML
+    private void onForwardButtonClick() {
+        boolean robotChoice = robotChoice();
+        String imageName = null;
+        if (robotChoice) { // robot go, user go
+            // TODO score
+            imageName = "crash.gif";
+        }
+        else { // robot avoid, user go
+            imageName = "safe.gif";
+        }
+        robot.setImage(new Image(Objects.requireNonNull(
+                MainApplication.class.getResourceAsStream(imageName))));
+
+        start.setDisable(false);
+        escape.setDisable(true);
+        forward.setDisable(true);
     }
 }

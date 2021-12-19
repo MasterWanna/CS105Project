@@ -8,15 +8,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainPane" alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cs105.project.MainController">
+<VBox fx:id="mainPane" alignment="CENTER" prefHeight="400.0" prefWidth="240.0" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cs105.project.MainController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-    <ImageView fx:id="robot" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+      <children>
+          <ImageView fx:id="robot" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      </children>
+   </VBox>
 
     <Label fx:id="welcomeText" />
     <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
-        <Button fx:id="escape" mnemonicParsing="false" prefHeight="41.0" prefWidth="61.0" text="躲避">
+        <Button fx:id="escape" disable="true" mnemonicParsing="false" onMouseClicked="#onEscapeButtonClick" prefHeight="41.0" prefWidth="61.0" text="躲避">
          <font>
             <Font size="15.0" />
          </font></Button>
@@ -25,12 +29,12 @@
             <Insets />
          </HBox.margin>
       </Label>
-        <Button fx:id="forward" mnemonicParsing="false" prefHeight="41.0" prefWidth="61.0" text="前进">
+        <Button fx:id="forward" disable="true" mnemonicParsing="false" onMouseClicked="#onForwardButtonClick" prefHeight="41.0" prefWidth="61.0" text="前进">
          <font>
             <Font size="15.0" />
          </font></Button>
     </HBox>
-    <Button fx:id="start" onAction="#onHelloButtonClick" prefHeight="34.0" prefWidth="55.0" text="开始">
+    <Button fx:id="start" onMouseClicked="#onStartButtonClick" prefHeight="34.0" prefWidth="55.0" text="开始">
       <font>
          <Font size="15.0" />
       </font></Button>
