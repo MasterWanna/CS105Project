@@ -60,6 +60,7 @@ public class MainController {
     private void onEscapeButtonClick() {
         long endTime = System.currentTimeMillis();
         boolean robotChoice = robotChoice();
+        double oldRange = Rand.range;
 
         String imageName = null;
         if (robotChoice) { // robot go, user avoid
@@ -86,7 +87,7 @@ public class MainController {
                 MainApplication.class.getResourceAsStream(imageName))));
 
         Logger.log(System.currentTimeMillis(), mutualGaze, robotChoice, false, endTime - startTime, robotScore,
-                userScore);
+                userScore, oldRange);
 
         start.setDisable(false);
         escape.setDisable(true);
@@ -97,6 +98,7 @@ public class MainController {
     private void onForwardButtonClick() {
         long endTime = System.currentTimeMillis();
         boolean robotChoice = robotChoice();
+        double oldRange = Rand.range;
 
         String imageName = null;
         if (robotChoice) { // robot go, user go
@@ -118,7 +120,7 @@ public class MainController {
                 MainApplication.class.getResourceAsStream(imageName))));
 
         Logger.log(System.currentTimeMillis(), mutualGaze, robotChoice, true, endTime - startTime, robotScore,
-                userScore);
+                userScore, oldRange);
 
         start.setDisable(false);
         escape.setDisable(true);
