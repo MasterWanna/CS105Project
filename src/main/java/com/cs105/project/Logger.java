@@ -22,7 +22,7 @@ public class Logger {
     }
 
     public static void flush() {
-        try (PrintStream out = new PrintStream(new FileOutputStream("player.log", true))) {
+        try (PrintStream out = new PrintStream(new FileOutputStream("player.tsv", true))) {
             for (Record r : records) {
                 out.println(r);
             }

@@ -3,6 +3,7 @@
 
 # Log file
 *.log
+player.tsv
 
 # BlueJ files
 *.ctxt
