@@ -71,7 +71,7 @@ public class MainController {
             } else {
                 Rand.range *= (1 - 0.06);
             }
-            imageName = "safe.gif";
+            imageName = "safe2.gif";
         } else { // robot avoid, user avoid
             robotScore = 1;
             userScore = 1;
@@ -80,7 +80,7 @@ public class MainController {
             } else {
                 Rand.range = 1 - (1 - Rand.range) * (1 - 0.02);
             }
-            imageName = "road.jpeg";
+            imageName = "safe3.gif";
         }
         welcomeText.setText(String.format("Your score: %d\t Robot's score: %d", userScore, robotScore));
         robot.setImage(new Image(Objects.requireNonNull(
@@ -109,11 +109,11 @@ public class MainController {
             } else {
                 Rand.range = 1 - (1 - Rand.range) * (1 - 0.08);
             }
-            imageName = "crash.gif";
+            imageName = "crash1.gif";
         } else { // robot avoid, user go
             robotScore = 0;
             userScore = 3;
-            imageName = "safe.gif";
+            imageName = "safe1.gif";
         }
         welcomeText.setText(String.format("Your score: %d\t Robot's score: %d", userScore, robotScore));
         robot.setImage(new Image(Objects.requireNonNull(
